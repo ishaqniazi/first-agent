@@ -1,19 +1,6 @@
 from agents import Runner, ItemHelpers , function_tool , Agent , RunConfig , AsyncOpenAI, OpenAIChatCompletionsModel, set_tracing_disabled
+from model_config import config
 
-external_client = AsyncOpenAI(
-    api_key='AIzaSyDWs8mqnOtOiLjsqaJu59FhFv-9jvcbtX8',
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/" ,
-)
-external_model = OpenAIChatCompletionsModel(
-    model = 'gemini-2.0-flash',
-    openai_client=external_client
-)
-
-config = RunConfig(
-    model= external_model,
-    model_provider=external_client,
-    tracing_disabled=True,
-)
 
 @function_tool(
         name_override="Mosam_update",
