@@ -1,23 +1,11 @@
 import os
+from agents.tool import def
 from agents import Agent, Runner, AsyncOpenAI, RunConfig, function_tool, OpenAIChatCompletionsModel, handoff, RunContextWrapper, HandoffInputData
 import requests
-external_client = AsyncOpenAI(
-    api_key=os.getenv('GEMINI_API_KEY'),
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
-)
+from model_config import config
 
-external_model = OpenAIChatCompletionsModel(
-    model = 'gemini-2.0-flash',
-    openai_client=external_client
-)
 
-config = RunConfig(
-    model= external_model,
-    model_provider=external_client,
-    tracing_disabled=True,
-)
-
-@function_tool
+@function_tool()
 def data (price: int):
     """
  Search for all products from https://dummyjson.com/products that match the given item
@@ -43,6 +31,7 @@ def data (price: int):
     response = requests.get("https://dummyjson.com/products")
     products = response.json().get("products", [])
     return products if products else "No matching products found."
+
 
 agent = Agent(
     name="searchData_agent",

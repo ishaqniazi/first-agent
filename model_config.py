@@ -1,10 +1,12 @@
-from agents import OpenAIChatCompletionsModel , AsyncOpenAI, RunConfig
+from agents import OpenAIChatCompletionsModel , AsyncOpenAI, RunConfig,function_tool
 from dotenv import load_dotenv
 import os
 
 _: bool = load_dotenv()
 # gemini_api_key: str = os.getenv('GEMINI_API_KEY')for checking the environment variable
 # print("GEMINI_API_KEY is set:", os.getenv
+
+
 
 client = AsyncOpenAI(
     api_key= os.getenv('GEMINI_API_KEY'),
